@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useNoteMutation } from "@/hooks/useNoteMutation";
-import { createNote } from "@/lib/api";
+import { createNote } from "@/lib/api/clientApi";
 import { useNoteDraftStore } from "@/lib/store/noteStore";
 import { BaseNoteParams, noteTag } from "@/types/note";
 import css from "./NoteForm.module.css";

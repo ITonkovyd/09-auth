@@ -8,6 +8,7 @@ export interface BaseNoteParams {
 
 export interface Note extends BaseNoteParams {
   id: string;
+  userId: string;
   createdAt: string;
   updatedAt: string;
 }

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useNoteMutation } from "@/hooks/useNoteMutation";
-import { deleteNote } from "@/lib/api";
+import { deleteNote } from "@/lib/api/clientApi";
 import type { Note } from "@/types/note";
 import css from "./NoteList.module.css";
 
