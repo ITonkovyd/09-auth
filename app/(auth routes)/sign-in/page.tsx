@@ -1,11 +1,13 @@
-"use client"
+"use client";
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { AuthRequest } from '@/types/user';
 import { login } from '@/lib/api/clientApi';
 import { ApiError } from '@/lib/api/clientApi';
 import { useAuthStore } from '@/lib/store/authStore';
+import { AuthRequest } from '@/types/user';
+import css from "./SignInPage.module.css";
+
 
 const SignIn = () => {
   const router = useRouter();
@@ -35,21 +37,23 @@ const SignIn = () => {
   };
 
   return (
-    <>
-      <form action={handleSubmit}>
-        <h1>Sign in</h1>
-        <label>
-          Email
-          <input type="email" name="email" required />
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" required />
-        </label>
-        <button type="submit">Log in</button>
+    <main className={css.mainContent}>
+      <form action={handleSubmit} className={css.form}>
+        <h1 className={css.formTitle}>Sign in</h1>
+        <div className={css.formGroup}>
+          <label htmlFor="email">Email</label>
+          <input id="email" type="email" name="email" required className={css.input} />
+        </div>
+        <div className={css.formGroup}>
+          <label htmlFor="password">Password</label>
+          <input id="password" type="password" name="password" required className={css.input} />
+        </div>
+        <div className={css.actions}>
+          <button type="submit" className={css.submitButton}>Log in</button>
+        </div>
+        {error && <p className={css.error}>{error}</p>}
       </form>
-      {error && <p>{error}</p>}
-    </>
+    </main>
   );
 };
 

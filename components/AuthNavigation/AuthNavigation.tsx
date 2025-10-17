@@ -2,8 +2,10 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useAuthStore } from '@/lib/store/authStore';
 import { logout } from '@/lib/api/clientApi';
+import { useAuthStore } from '@/lib/store/authStore';
+import css from "./AuthNavigation.module.css";
+
 
 const AuthNavigation = () => {
   const router = useRouter();
@@ -20,17 +22,17 @@ const AuthNavigation = () => {
   };
 
   return isAuthenticated ? (
-    <li>
-      <p>{user?.email}</p>
-      <button onClick={handleLogout}>Logout</button>
+    <li className={css.navigationItem}>
+      <span className={css.userEmail}>{user?.email}</span>
+      <button onClick={handleLogout} className={css.logoutButton}>Logout</button>
     </li>
   ) : (
     <>
-      <li>
-        <Link href="/sign-in">Login</Link>
+      <li className={css.navigationItem}>
+        <Link href="/sign-in" className={css.navigationLink}>Login</Link>
       </li>
-      <li>
-        <Link href="/sign-up">Sign up</Link>
+      <li className={css.navigationItem}>
+        <Link href="/sign-up" className={css.navigationLink}>Sign up</Link>
       </li>
     </>
   );
