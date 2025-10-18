@@ -1,25 +1,30 @@
 "use client";
 
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useNoteMutation } from "@/hooks/useNoteMutation";
 import { createNote } from "@/lib/api/clientApi";
 import { useNoteDraftStore } from "@/lib/store/noteStore";
 import { BaseNoteParams, noteTag } from "@/types/note";
 import css from "./NoteForm.module.css";
 
-
 const TAGS: noteTag[] = ["Todo", "Work", "Personal", "Meeting", "Shopping"];
 
 const NoteForm = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { draft, setDraft, clearDraft } = useNoteDraftStore();
 
-  const { mutate } = useNoteMutation<BaseNoteParams>({
+  const { mutate } = useMutation({
     mutationFn: (newNote: BaseNoteParams) => createNote(newNote),
-    queryKey: ["notes"],
-    successMsg: "Note created successfully",
-    errorMsg: "Error creating note",
-    successAction: () => router.push("/notes/filter/All"),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
+      clearDraft();
+      router.push("/notes/filter/All");
+      console.log("Note created successfully");
+    },
+    onError: (error) => {
+      console.error("Error creating note", error);
+    },
   });
 
   const backToPreviousPage = () => {
@@ -42,7 +47,6 @@ const NoteForm = () => {
 
     const values: BaseNoteParams = { title, content, tag };
     mutate(values);
-    clearDraft();
   };
 
   return (

@@ -24,6 +24,7 @@ const AuthNavigation = () => {
   return isAuthenticated ? (
     <li className={css.navigationItem}>
       <span className={css.userEmail}>{user?.email}</span>
+      <Link href="/profile" className={css.navigationLink}>Profile</Link>
       <button onClick={handleLogout} className={css.logoutButton}>Logout</button>
     </li>
   ) : (

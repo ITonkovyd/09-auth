@@ -40,6 +40,19 @@
   align-items: flex-start;
 }
 
+.emailWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.emailLabel {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #222;
+}
+
 .usernameWrapper {
   display: flex;
   flex-direction: column;

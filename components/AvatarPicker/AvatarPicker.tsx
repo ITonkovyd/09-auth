@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import css from './EditProfilePage.module.css';
+import Image from "next/image";
+import css from "@/app/(private routes)/profile/edit/EditProfilePage.module.css";
 
 type Props = {
   profilePhotoUrl?: string;
